@@ -1,0 +1,42 @@
+<div class="container">
+  <h1><%= @article.title %></h1>
+</div>
+
+<div class="container">
+  <p><%= @article.body %></p>
+  <ul>
+    <li><%= link_to "Edit", edit_article_path(@article) %></li>
+    <li><%= link_to "Destroy", article_path(@article), method: :delete %></li>
+  </ul>
+
+  <div class= "comments">
+  <h2 class= "all-comments">Comments</h2>
+  <% @article.remarks.each do |remark| %>
+    <p>
+      <strong>Name:</strong>
+      <%= remark.name %>
+    </p>
+    <p>
+      <strong>Comment:</strong>
+      <%= remark.comment %>
+    </p>
+  <% end %>
+
+  <div class= "add-comment">
+    <h2>Add a comment:</h2>
+    <%= form_with model: [ @article, @article.remarks.build ] do |form| %>
+      <p>
+        <%= form.label :name %><br>
+        <%= form.text_field :name %>
+      </p>
+      <p>
+        <%= form.label :comment %><br>
+        <%= form.text_area :comment %>
+      </p>
+      <p>
+        <%= form.submit %>
+      </p>
+    <% end %>
+  </div>
+
+</div>
